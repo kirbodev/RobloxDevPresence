@@ -31,8 +31,7 @@
     "chalk": "^4.1.2",
     "discord-rpc": "^4.0.1",
     "find-process": "^1.4.7",
-    "inquirer": "^8.2.5",
-    "user-startup": "^0.2.2"
+    "inquirer": "^8.2.5"
   },
   "devDependencies": {
     "@types/figlet": "^1.5.5",

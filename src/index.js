@@ -38,7 +38,7 @@ async function setPresence(game) {
   if (prevstatus) {
     if (prevstatus.title == "Roblox Studio") {
       if (game.title != "Roblox Studio") {
-        if (game.title != "Place1") {
+        if (game.title != "Auto-Recovery") {
           projName = game.title.replace(" - Roblox Studio", "");
         }
       }
@@ -49,7 +49,7 @@ async function setPresence(game) {
       game.title.replace(" - Roblox Studio", "") == projName
         ? `Editing ${config.projectName || projName || "a project"}`
         : `Editing ${game.title.replace(" - Roblox Studio", "")}`;
-    if (game.title.replace(" - Roblox Studio", "") == "Roblox Studio") {
+    if (game.title.replace(" - Roblox Studio", "") == "Roblox Studio" || game.title.replace(" - Roblox Studio", "") == "Auto-Recovery") {
       gameInfo.state = "On the home page";
     }
   } else {
@@ -58,12 +58,11 @@ async function setPresence(game) {
         .replace("{projectName}", config.projectName || projName || "a project")
         .replace("{fileName}", game.title.replace(" - Roblox Studio", "")) ||
       "Editing a project";
-    if (game.title.replace(" - Roblox Studio", "") == "Roblox Studio") {
+    if (game.title.replace(" - Roblox Studio", "") == "Roblox Studio" || game.title.replace(" - Roblox Studio", "") == "Auto-Recovery") {
       gameInfo.state = "On the home page";
     }
   }
-  console.log(projName, game.title.replace(" - Roblox Studio", ""));
-  if (game.title.replace(" - Roblox Studio", "") == "Roblox Studio") {
+  if (game.title.replace(" - Roblox Studio", "") == "Roblox Studio" || game.title.replace(" - Roblox Studio", "") == "Auto-Recovery") {
     gameInfo.largeImageKey = "home";
     gameInfo.largeImageText = "On the home page";
   } else if (game.title.replace(" - Roblox Studio", "") == projName) {
@@ -77,9 +76,14 @@ async function setPresence(game) {
   prevstatus = game;
 }
 
+let wasRobloxOpen = false;
 async function lookup() {
   find("name", "RobloxStudioBeta.exe", true).then(async function (list) {
     if (list.length > 0) {
+      if (!wasRobloxOpen) {
+        wasRobloxOpen = true;
+        gameInfo.startTimestamp = new Date();
+      }
       const info = await win();
       if (info) {
         if (
@@ -89,12 +93,17 @@ async function lookup() {
           setPresence(info);
         }
       }
+    } else {
+      if (wasRobloxOpen) {
+        wasRobloxOpen = false;
+        client.clearActivity();
+      }
     }
   });
 }
 
 client.on("ready", () => {
-  var startTimestamp = new Date();
+  let startTimestamp = new Date();
   gameInfo = {
     details: `Made by ${config.author || client.user.username}`,
     state: "Idling",
