@@ -1,4 +1,4 @@
-import { compile } from 'nexe';
+const { compile } = require('nexe');
 
 compile({
     input: '../src/index.js',
