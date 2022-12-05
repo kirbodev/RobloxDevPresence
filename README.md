@@ -47,7 +47,7 @@ I completely removed the need for a plugin by using the window title of the Robl
 
 #### **Installation**
 1. Clone the repo.
-2. Run `npm run setup`, wait for packages to install and then follow the instructions.
+2. Run `npm run setup` or open `setup.cmd`, wait for packages to install and then follow the instructions.
 3. Wait for it to finish.
 4. Change the config in `src/config.js` to your liking.
 5. Restart your computer or run `npm start` in the directory.
