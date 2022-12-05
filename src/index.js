@@ -13,19 +13,29 @@ if (!config.use) {
   );
   config = {};
 } else {
-  if (!config.projectName) {
-    console.log(chalk.bold(chalk.yellow("Project name is not set!")));
-    config.projectName = "MyProject";
+  if (!config.projectName || config.projectName == "default") {
+    config.projectName = null;
   }
-  if (!config.description) {
-    console.log(chalk.bold(chalk.yellow("Description is not set!")));
-    config.description = "Description";
+  if (!config.author || config.author == "default") {
+    config.author = null;
   }
-  if (!config.author) {
+  if (!config.buttonUrl.startsWith("https://www.roblox.com/")) {
     console.log(
-      chalk.bold(chalk.yellow("Author is not set, using your username"))
+      chalk.bold(
+        chalk.yellow(
+          "Button URL is not a roblox.com URL! Button has been disabled."
+        )
+      )
     );
-    config.author = "Author";
+    config.buttonUrl = null;
+  }
+  if (!config.sButtonUrl.startsWith("https://")) {
+    console.log(
+      chalk.bold(
+        chalk.yellow("Button URL is not a valid URL! Button has been disabled.")
+      )
+    );
+    config.sButtonUrl = null;
   }
 }
 
@@ -49,7 +59,10 @@ async function setPresence(game) {
       game.title.replace(" - Roblox Studio", "") == projName
         ? `Editing ${config.projectName || projName || "a project"}`
         : `Editing ${game.title.replace(" - Roblox Studio", "")}`;
-    if (game.title.replace(" - Roblox Studio", "") == "Roblox Studio" || game.title.replace(" - Roblox Studio", "") == "Auto-Recovery") {
+    if (
+      game.title.replace(" - Roblox Studio", "") == "Roblox Studio" ||
+      game.title.replace(" - Roblox Studio", "") == "Auto-Recovery"
+    ) {
       gameInfo.state = "On the home page";
     }
   } else {
@@ -58,11 +71,17 @@ async function setPresence(game) {
         .replace("{projectName}", config.projectName || projName || "a project")
         .replace("{fileName}", game.title.replace(" - Roblox Studio", "")) ||
       "Editing a project";
-    if (game.title.replace(" - Roblox Studio", "") == "Roblox Studio" || game.title.replace(" - Roblox Studio", "") == "Auto-Recovery") {
+    if (
+      game.title.replace(" - Roblox Studio", "") == "Roblox Studio" ||
+      game.title.replace(" - Roblox Studio", "") == "Auto-Recovery"
+    ) {
       gameInfo.state = "On the home page";
     }
   }
-  if (game.title.replace(" - Roblox Studio", "") == "Roblox Studio" || game.title.replace(" - Roblox Studio", "") == "Auto-Recovery") {
+  if (
+    game.title.replace(" - Roblox Studio", "") == "Roblox Studio" ||
+    game.title.replace(" - Roblox Studio", "") == "Auto-Recovery"
+  ) {
     gameInfo.largeImageKey = "home";
     gameInfo.largeImageText = "On the home page";
   } else if (game.title.replace(" - Roblox Studio", "") == projName) {
@@ -112,11 +131,39 @@ client.on("ready", () => {
     smallImageText: "Roblox Studio",
     largeImageKey: "home",
     largeImageText: "On the home page",
+    buttons: [],
     instance: false,
   };
 
   if (config.descText) {
-    config.descText.replace("{author}", config.author || client.user.username);
+    config.descText = config.descText.replace("{author}", config.author || client.user.username);
+    gameInfo.details = config.descText;
+  }
+  if (
+    config.buttonUrl &&
+    config.buttonUrl != "default" &&
+    config.buttonUrl != ""
+  ) {
+    gameInfo.buttons.push({
+      label:
+        config.buttonText == "default" || !config.buttonText
+          ? "View on roblox"
+          : config.buttonText,
+      url: config.buttonUrl,
+    });
+  }
+  if (
+    config.sButtonUrl &&
+    config.sButtonUrl != "default" &&
+    config.sButtonUrl != ""
+  ) {
+    gameInfo.buttons.push({
+      label:
+        config.sButtonText == "default" || !config.sButtonText
+          ? "Visit"
+          : config.sButtonText,
+      url: config.sButtonUrl,
+    });
   }
   lookup();
   setInterval(() => {
