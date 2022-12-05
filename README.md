@@ -72,7 +72,6 @@ I completely removed the need for a plugin by using the window title of the Robl
 - [Discord](https://discord.com/) - Discord
 - [Node.js](https://nodejs.org/) - Node.js
 - [Chalk](https://github.com/chalk/chalk) - Console colouring
-- [Figlet](https://github.com/patorjk/figlet.js) - Console ASCII art
 - [Active-win](https://github.com/sindresorhus/active-win) - Getting roblox studio window title
 - [Find-process](https://github.com/yibn2008/find-process) - Getting roblox studio process
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js) - Console prompts

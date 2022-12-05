@@ -1,7 +1,6 @@
 const fs = require("fs").promises;
 const path = require("path");
 const chalk = require("chalk");
-const figlet = require("figlet");
 const startup = require("user-startup");
 const inq = require("inquirer");
 const prompt = inq.createPromptModule();
@@ -9,11 +8,7 @@ const prompt = inq.createPromptModule();
 const setup = async () => {
   console.log(chalk.blue("Welcome to"));
   console.log(
-    chalk.blue(
-      figlet.textSync("RobloxDevPresence", {
-        horizontalLayout: "full",
-      })
-    )
+    chalk.bold(chalk.blue(chalk.bgGreen("RobloxDevPresence Setup")))
   );
   console.log(chalk.blue("A Discord Rich Presence for Roblox Studio"));
   console.log(chalk.magenta("Made by kirbodev"));
