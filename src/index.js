@@ -135,7 +135,7 @@ client.on("ready", () => {
     instance: false,
   };
 
-  if (config.descText) {
+  if (config.descText && config.descText != "default") {
     config.descText = config.descText.replace("{author}", config.author || client.user.username);
     gameInfo.details = config.descText;
   }
