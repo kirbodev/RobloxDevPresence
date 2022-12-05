@@ -11,7 +11,6 @@ const setup = async () => {
   console.log(
     chalk.blue(
       figlet.textSync("RobloxDevPresence", {
-        font: "Standard",
         horizontalLayout: "full",
       })
     )
