@@ -1,0 +1,42 @@
+{
+  "name": "robloxdevpresence",
+  "version": "1.0.0",
+  "description": "Sets your Discord rich presence to whatever you're doing on Roblox Studio.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "setup": "npm install && node src/setup.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirbodev/RobloxDevPresence.git"
+  },
+  "keywords": [
+    "roblox",
+    "dev",
+    "studio",
+    "discord",
+    "rich",
+    "presence",
+    "rpc"
+  ],
+  "author": "kirbodev",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/kirbodev/RobloxDevPresence/issues"
+  },
+  "homepage": "https://github.com/kirbodev/RobloxDevPresence#readme",
+  "dependencies": {
+    "active-win": "^7.7.2",
+    "chalk": "^4.1.2",
+    "discord-rpc": "^4.0.1",
+    "figlet": "^1.5.2",
+    "find-process": "^1.4.7",
+    "inquirer": "^8.2.5",
+    "user-startup": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.5.5",
+    "nexe": "^4.0.0-rc.1"
+  }
+}
