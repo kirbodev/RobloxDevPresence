@@ -76,6 +76,9 @@ async function setPresence(game) {
       game.title.replace(" - Roblox Studio", "") == "Auto-Recovery"
     ) {
       gameInfo.state = "On the home page";
+      if (!config.descText || config.descText == "default") {
+        gameInfo.details = "Idling";
+      }
     }
   }
   if (
@@ -125,7 +128,7 @@ client.on("ready", () => {
   let startTimestamp = new Date();
   gameInfo = {
     details: `Made by ${config.author || client.user.username}`,
-    state: "Idling",
+    state: "On the home page",
     startTimestamp,
     smallImageKey: "robloxstudio",
     smallImageText: "Roblox Studio",
