@@ -8,7 +8,7 @@ const prompt = inq.createPromptModule();
 const setup = async () => {
   console.log(chalk.blue("Welcome to"));
   console.log(
-    chalk.bold(chalk.blue(chalk.bgGreen("RobloxDevPresence Setup")))
+    chalk.bold(chalk.blue(chalk.italic("RobloxDevPresence Setup")))
   );
   console.log(chalk.blue("A Discord Rich Presence for Roblox Studio"));
   console.log(chalk.magenta("Made by kirbodev"));
